@@ -9,6 +9,9 @@ import styles from '../stepPhoneEmail.module.css';
 
 const Email = ({ onNext }) => {
     const [email, setEmail] = useState('');
+
+
+    
     return (
         <Card title="Enter your email id" icon="email-emoji">
             <TextInput
@@ -20,7 +23,7 @@ const Email = ({ onNext }) => {
                     <Button text="Next" onClick={onNext} />
                 </div>
                 <p className={styles.bottomParagraph}>
-                    By entering your number, you’re agreeing to our Terms of
+                    By entering your Email, you’re agreeing to our Terms of
                     Service and Privacy Policy. Thanks!
                 </p>
             </div>

@@ -5,8 +5,6 @@ import {
 } from "react-router-dom";
 import Home from './pages/Home/Home';
 import Navigation from './components/shared/navigation/Navigation';
-import Login from './pages/Login/Login';
-import Registration from './pages/Registration/Registration';
 import GuestRoutes from './ProtectedRoutes/GuestRoutes';
 import Authenticate from './pages/authenticate/Authenticate';
 import ProtectedRoutes from './ProtectedRoutes/ProtectedRoutes';

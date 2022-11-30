@@ -31,4 +31,4 @@ class OtpService {
     
 }
 
-module.exports = new OtpService();
+module.exports = new OtpService(); //JS Singleton pattern.
