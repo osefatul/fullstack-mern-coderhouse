@@ -9,6 +9,7 @@ import GuestRoutes from './ProtectedRoutes/GuestRoutes';
 import Authenticate from './pages/authenticate/Authenticate';
 import ProtectedRoutes from './ProtectedRoutes/ProtectedRoutes';
 import Rooms from './pages/rooms/Rooms';
+import Activate from './pages/activate/Activate';
 
 
 
@@ -42,6 +43,14 @@ function App() {
       }/>
 
 
+      <Route path="/activate" element={
+        <>
+          <Navigation />
+          <Activate />
+        </>
+      }/>
+
+
     {/* <Route path='/' element={<GuestRoutes/>}></Route> */}
 
 
@@ -53,9 +62,7 @@ function App() {
       </>
       
       }/>
-
     </Route> */}
-
 
 
   </Routes>

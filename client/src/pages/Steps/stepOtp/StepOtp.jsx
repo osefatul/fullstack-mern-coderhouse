@@ -6,13 +6,14 @@ import styles from './stepOtp.module.css';
 import { verifyOtp } from '../../../http';
 import { useSelector } from 'react-redux';
 import { setAuth } from '../../../features/authSlice'
-import { useDispatch } from 'react-redux';
-
+import { useDispatch} from 'react-redux';
+import { useNavigate } from "react-router-dom";
 
 
 const StepOtp = () => {
     const [otp, setOtp] = useState('');
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const { phone, hash } = useSelector((state) => state.auth.otp);
     
@@ -20,6 +21,10 @@ const StepOtp = () => {
         try {
             const { data } = await verifyOtp({ otp, phone, hash });
             dispatch(setAuth(data));
+            if(data){
+                navigate("/activate")
+            }
+
         } catch (err) {
             console.log(err);
         }
