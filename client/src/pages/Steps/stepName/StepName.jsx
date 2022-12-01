@@ -12,8 +12,9 @@ import styles from './stepName.module.css';
 
 
 const StepName = ({ onNext }) => {
-    const { name } = useSelector((state) => state.activate);
     const dispatch = useDispatch();
+
+    const { name } = useSelector((state) => state.activate);
     const [fullname, setFullname] = useState(name);
 
     function nextStep() {
@@ -23,6 +24,8 @@ const StepName = ({ onNext }) => {
         dispatch(setName(fullname));
         onNext();
     }
+
+
     return (
         <>
             <Card title="What’s your full name?" icon="goggle-emoji">
