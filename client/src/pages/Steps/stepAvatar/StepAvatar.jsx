@@ -11,7 +11,6 @@ import { setAuth } from '../../../features/authSlice';
 
 
 const StepAvatar = ({ onNext }) => {
-
     const dispatch = useDispatch();
     const { name, avatar } = useSelector((state) => state.activate);
     const [image, setImage] = useState('/images/monkey-avatar.png');
@@ -21,12 +20,15 @@ const StepAvatar = ({ onNext }) => {
         const file = e.target.files[0];
         const reader = new FileReader();
         reader.readAsDataURL(file);
-        reader.onloadend = function () {
+        reader.onload = function () {
             setImage(reader.result);
             dispatch(setAvatar(reader.result));
+            console.log(reader.result.split("/")[1].split(";")[0])
         };
     }
-    
+
+
+
     async function submit() {
         try {
             const { data } = await activate({ name, avatar });

@@ -89,8 +89,6 @@ class AuthController {
 
         const userDto = new UserDto(user);
         res.json({ user: userDto, auth: true });
-
-
     }
 }
 

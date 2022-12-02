@@ -16,7 +16,6 @@ class TokenService {
     }
 
 
-
     async storeRefreshToken(token, userId) {
         try {
             await refreshModel.create({
@@ -27,6 +26,7 @@ class TokenService {
             console.log(err.message);
         }
     }
+
 
     async verifyAccessToken(token) {
         return jwt.verify(token, accessTokenSecret);
