@@ -14,7 +14,7 @@ function ProtectedRoutes({ children }) {
         <div>
         {
             !isAuth?
-            <Navigate to="/authenticate" state={{from:location}} replace/>
+            <Navigate to="/"  state={{from:location}} replace/>
             : isAuth && !user.activated ?
             <Navigate to="/activate" state={{from:location}} replace/>
             : 

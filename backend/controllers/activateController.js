@@ -14,9 +14,10 @@ class ActivateController {
         }
 
         // Image Base64
-        const extension = avatar.split("/")[1].split(";")[0]
+        const extension = avatar.split("/")[1].split(";")[0] //get extension from image base64
         const buffer = Buffer.from(
-            avatar.replace(/^data:image\/png;base64,/, ''),
+            // avatar.replace(/^data:image\/png;base64,/, ''),
+            avatar.replace(`data:image/${extension};base64,`, ''),
             'base64'
         );
 

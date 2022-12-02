@@ -19,7 +19,7 @@ function SemiProtectRoutes({ children }){
             <main>
                 <Outlet/>
             </main>:
-            <Navigate to="/rooms" state={{from:location}} replace/>
+            <Navigate to="rooms" state={{from:location}} replace/>
         }
         </div>
 

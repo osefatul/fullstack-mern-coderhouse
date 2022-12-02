@@ -13,8 +13,8 @@ function GuestRoutes({ children}) {
 
         <div>
         {
-            !isAuth?
-            <Navigate to="/rooms" state={{from:location}} replace/>
+            isAuth?
+            <Navigate to="rooms" state={{from:location}} replace/>
             :
             <main>
                 <Outlet/>

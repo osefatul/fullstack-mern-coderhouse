@@ -10,6 +10,7 @@ import Authenticate from './pages/authenticate/Authenticate';
 import ProtectedRoutes from './ProtectedRoutes/ProtectedRoutes';
 import Rooms from './pages/rooms/Rooms';
 import Activate from './pages/activate/Activate';
+import SemiProtectRoutes from './ProtectedRoutes/SemiProtectRoutes';
 
 
 
@@ -19,50 +20,75 @@ function App() {
     <Routes>
 
 
-      <Route path="/" element={
+      {/* <Route path="/" element={
         <>
           <Navigation />
           <Home/>
         </>
-      }/>
+      }/> */}
 
 
-      <Route path="/authenticate" element={
+      {/* <Route path="/authenticate" element={
+        <>
+          <Navigation />
+          <Authenticate />
+        </>
+      }/> */}
+
+
+      {/* <Route path="/rooms" element={
+        <>
+          <Navigation />
+          <Rooms />
+        </>
+      }/> */}
+
+
+      {/* <Route path="/activate" element={
+        <>
+          <Navigation />
+          <Activate />
+        </>
+      }/> */}
+
+
+    <Route path='/' element={<GuestRoutes/>}>
+      <Route path="/" element={
+          <>
+            <Navigation />
+            <Home/>
+          </>
+        }/>
+
+
+      <Route path="authenticate" element={
         <>
           <Navigation />
           <Authenticate />
         </>
       }/>
 
-
-      <Route path="/rooms" element={
-        <>
-          <Navigation />
-          <Rooms />
-        </>
-      }/>
+    </Route>
 
 
-      <Route path="/activate" element={
+    <Route path='/' element={<SemiProtectRoutes/>}>
+      <Route path="activate" element={
         <>
           <Navigation />
           <Activate />
         </>
       }/>
+    </Route>
 
 
-    {/* <Route path='/' element={<GuestRoutes/>}></Route> */}
-
-
-    {/* <Route path='/' element={<ProtectedRoutes/>}>
+    <Route path='/' element={<ProtectedRoutes/>}>
       <Route path="/rooms" element={
         <>
           <Navigation />
           <Rooms />
-      </>
-      
+        </>
       }/>
-    </Route> */}
+    </Route>
 
 
   </Routes>
