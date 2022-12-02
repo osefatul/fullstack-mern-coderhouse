@@ -33,7 +33,7 @@ class ActivateController {
             // console.log("jimResp", jimResp);
 
             jimResp
-                .resize(150, 150)
+                .resize(150, Jimp.AUTO)
                 .write(path.resolve(__dirname, `../storage/${imagePath}`));
         } catch (err) {
             res.status(500).json({ message: 'Could not process the image' });

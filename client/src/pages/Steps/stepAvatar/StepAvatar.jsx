@@ -7,6 +7,7 @@ import { setAvatar } from '../../../features/activateSlice';
 import { activate } from '../../../http';
 import { setAuth } from '../../../features/authSlice';
 import { useNavigate, useLocation } from 'react-router-dom';
+import Loader from '../../../components/shared/loader/Loader';
 
 
 
@@ -38,20 +39,28 @@ const StepAvatar = ({ onNext }) => {
 
 
     async function submit() {
+
         if (!name || !avatar) return;
         setLoading(true);
 
         try {
             const { data } = await activate({ name, avatar });
+
             if (data.auth) {
+                if(!unMounted){
                     dispatch(setAuth(data));
+                }
             }
-            console.log(data);
-            if(location.state.from.pathname){
-                navigate(location?.state.from?.pathname)
+
+            // console.log(data);
+            if(location?.state?.from?.pathname){
+                navigate(location?.state?.from?.pathname)
             }
+
         } catch (err) {
             console.log(err);
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -61,6 +70,7 @@ const StepAvatar = ({ onNext }) => {
         };
     }, []);
 
+    if (loading) return <Loader message="Activation in progress..." />;
     return (
         <>
             <Card title={`Okay, ${name}`} icon="monkey-emoji">
@@ -84,11 +94,12 @@ const StepAvatar = ({ onNext }) => {
                     </label>
                 </div>
                 <div>
-                    <Button onClick={() => submit()} text="Next" />
+                    <Button onClick={submit} text="Next" />
                 </div>
             </Card>
         </>
     );
 };
+
 
 export default StepAvatar;

@@ -3,7 +3,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import Home from './pages/Home/Home';
+import Home from './pages/home/Home';
 import Navigation from './components/shared/navigation/Navigation';
 import GuestRoutes from './ProtectedRoutes/GuestRoutes';
 import Authenticate from './pages/authenticate/Authenticate';
@@ -11,85 +11,57 @@ import ProtectedRoutes from './ProtectedRoutes/ProtectedRoutes';
 import Rooms from './pages/rooms/Rooms';
 import Activate from './pages/activate/Activate';
 import SemiProtectRoutes from './ProtectedRoutes/SemiProtectRoutes';
+import { useLoadingWithRefresh } from './hooks/useLoadingWithRefresh';
+import Loader from './components/shared/loader/Loader';
 
 
 
 
 function App() {
-  return (
+
+  const {loading} = useLoadingWithRefresh ();
+
+  return loading ? (
+    <Loader message="Loading, please wait.." />
+) : (
+
     <Routes>
 
-
-      {/* <Route path="/" element={
-        <>
-          <Navigation />
-          <Home/>
-        </>
-      }/> */}
-
-
-      {/* <Route path="/authenticate" element={
-        <>
-          <Navigation />
-          <Authenticate />
-        </>
-      }/> */}
+      <Route path='/' element={<GuestRoutes/>}>
+        <Route path="/" element={
+            <>
+              <Navigation />
+              <Home/>
+            </>
+          }/>
 
 
-      {/* <Route path="/rooms" element={
-        <>
-          <Navigation />
-          <Rooms />
-        </>
-      }/> */}
-
-
-      {/* <Route path="/activate" element={
-        <>
-          <Navigation />
-          <Activate />
-        </>
-      }/> */}
-
-
-    <Route path='/' element={<GuestRoutes/>}>
-      <Route path="/" element={
+        <Route path="authenticate" element={
           <>
             <Navigation />
-            <Home/>
+            <Authenticate />
           </>
         }/>
 
+      </Route>
 
-      <Route path="authenticate" element={
-        <>
-          <Navigation />
-          <Authenticate />
-        </>
-      }/>
+      <Route path='/' element={<SemiProtectRoutes/>}>
+        <Route path="activate" element={
+          <>
+            <Navigation />
+            <Activate />
+          </>
+        }/>
+      </Route>
 
-    </Route>
-
-
-    <Route path='/' element={<SemiProtectRoutes/>}>
-      <Route path="activate" element={
-        <>
-          <Navigation />
-          <Activate />
-        </>
-      }/>
-    </Route>
-
-
-    <Route path='/' element={<ProtectedRoutes/>}>
-      <Route path="/rooms" element={
-        <>
-          <Navigation />
-          <Rooms />
-        </>
-      }/>
-    </Route>
-
+      <Route path='/' element={<ProtectedRoutes/>}>
+        <Route path="/rooms" element={
+          <>
+            <Navigation />
+            <Rooms />
+          </>
+        }/>
+      </Route>
 
   </Routes>
 
