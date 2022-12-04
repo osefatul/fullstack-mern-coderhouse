@@ -29,6 +29,7 @@ const RoomCard = ({ room }) => {
                         />
                     ))}
                 </div>
+                
                 <div className={styles.names}>
                     {room.speakers.map((speaker) => (
                         <div key={speaker.id} className={styles.nameWrapper}>

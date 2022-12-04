@@ -16,6 +16,7 @@ const StepAvatar = ({ onNext }) => {
     const location = useLocation();
     const navigate = useNavigate();
 
+
     // console.log(location.state.from.pathname)
 
 
@@ -32,7 +33,6 @@ const StepAvatar = ({ onNext }) => {
         reader.onload = function () {
             setImage(reader.result);
             dispatch(setAvatar(reader.result));
-            // console.log(reader.result.split("/")[1].split(";")[0]) //find extension
         };
     }
 
@@ -46,16 +46,13 @@ const StepAvatar = ({ onNext }) => {
         try {
             const { data } = await activate({ name, avatar });
 
-            if (data.auth) {
-                if(!unMounted){
-                    dispatch(setAuth(data));
-                }
-            }
+            data.auth && data.user.activated && dispatch(setAuth(data));
 
-            // console.log(data);
-            if(location?.state?.from?.pathname){
-                navigate(location?.state?.from?.pathname)
-            }
+            // if (data.auth) {
+            //     if(!unMounted){
+            //         dispatch(setAuth(data));
+            //     }
+            // }
 
         } catch (err) {
             console.log(err);

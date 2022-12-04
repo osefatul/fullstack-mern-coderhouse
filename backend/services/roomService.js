@@ -17,7 +17,7 @@ class RoomService {
 
     async getAllRooms(types) {
         const rooms = await RoomModel.find({ roomType: { $in: types } })
-            .populate('speakers')
+            .populate('speakers')//this will not only send id but whole object of speakers.
             .populate('ownerId')
             .exec();
         return rooms;

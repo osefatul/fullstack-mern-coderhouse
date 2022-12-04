@@ -13,6 +13,7 @@ import Activate from './pages/activate/Activate';
 import SemiProtectRoutes from './ProtectedRoutes/SemiProtectRoutes';
 import { useLoadingWithRefresh } from './hooks/useLoadingWithRefresh';
 import Loader from './components/shared/loader/Loader';
+import Room from './pages/room/Room';
 
 
 
@@ -61,6 +62,15 @@ function App() {
             <Rooms />
           </>
         }/>
+
+
+        <Route path="/room/:id" element={
+          <>
+            <Navigation />
+            <Room />
+          </>
+        }/>
+        
       </Route>
 
   </Routes>

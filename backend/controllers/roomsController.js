@@ -2,6 +2,7 @@ const RoomDto = require('../dtos/roomDto');
 const roomService = require('../services/roomService');
 
 class RoomsController {
+    
     async create(req, res) {
         // room
         const { topic, roomType } = req.body;

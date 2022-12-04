@@ -18,6 +18,7 @@ function ProtectedRoutes({ children }) {
             : isAuth && !user.activated ?
             <Navigate to="/activate" state={{from:location}} replace/>
             : 
+             //once user is activated this will get triggered in setAvatar.jsx
             <main>
                 <Outlet/>
             </main>
