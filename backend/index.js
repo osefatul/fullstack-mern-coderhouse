@@ -11,17 +11,11 @@ const server = require("http").createServer(app);
 
 
 //SETTING WEB_SOCKET SERVER
-const io = require('socket.io')(server, {
-    cors: {
-        origin: "http://localhost:3000",
-        methods: ["GET","POST"]
-}});
-
-
+const io = require('socket.io')(server);
 
 
 app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
     res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept");
@@ -39,6 +33,8 @@ const corsOption = {
 
 
 app.use(cors(corsOption));
+
+
 app.use('/storage', express.static('storage'));
 
 const PORT = process.env.PORT || 5500;
@@ -65,22 +61,19 @@ io.on("connection", (socket)=>{
     socket.on("JOIN", ({roomId, user})=>{
         socketUserMapping[socket.id] = user;
 
-         //JOIN THE socket with roomId
-        socket.join(roomId);
-
         //Get me socketId of all the users joined this specific room (roomId) from all the rooms inside the io server or if there is no client inside the room created yet then give me an empty array of clients.
-        const clients = Array.from (io.sockets.adapter.rooms.get(roomId) || []);
+        const clients = Array.from(io.sockets.adapter.rooms.get(roomId) || []);
         console.log("clients: ", clients)
 
         // If there are clients inside the room, the one we just got.
         //clientId = socket.id inside the room
-        clients.forEach(clientId => {
+        clients.forEach((clientId) => {
 
             //SEND EMIT TO PEERS FOR CONNECTION, and tell them don't worry about offer, we will create them.
             io.to(clientId).emit("ADD_PEER", {
                 peerId: socket.id, //send to other clients my socket.id
-                createOffer:false,
-                user
+                createOffer: false,
+                user,
             });
 
             //ADDING MYSELF AS WELL INTO THE CONNECTION OR ROOM
@@ -90,6 +83,9 @@ io.on("connection", (socket)=>{
                 user: socketUserMapping[clientId]
             })
         })
+
+         //JOIN THE socket with roomId
+        socket.join(roomId);
 
     });
 
@@ -113,11 +109,53 @@ io.on("connection", (socket)=>{
     })
 
 
+
+    //HANDLE MUTE
+    socket.on("MUTE", ({roomId, userId})=>{
+        const clients = Array.from (io.sockets.adapter.rooms.get(roomId) || []);
+
+        clients.forEach( clientId =>{
+            io.to(clientId).emit("MUTE", {
+                peerId: socket.id,
+                userId
+            })
+        })
+    })
+
+
+    //HANDLE UN_MUTE 
+    socket.on("UN_MUTE", ({roomId, userId})=>{
+        const clients = Array.from (io.sockets.adapter.rooms.get(roomId) || []);
+
+        clients.forEach( clientId =>{
+            io.to(clientId).emit("UN_MUTE", {
+                peerId: socket.id,
+                userId
+            })
+        })
+    })
+
+
+
+    socket.on("MUTE_INFO", ({ userId, roomId, isMute }) => {
+        const clients = Array.from(io.sockets.adapter.rooms.get(roomId) || []);
+        clients.forEach((clientId) => {
+            if (clientId !== socket.id) {
+                console.log('mute info');
+                io.to(clientId).emit("MUTE_INFO", {
+                    userId,
+                    isMute,
+                });
+            }
+        });
+    });
+
+
+
+
     //LEAVE ROOM
-    const leaveRoom = ({roomId}) => {
-
+    const leaveRoom = () => {
         const {rooms} = socket; //get all rooms from socket.
-
         Array.from(rooms).forEach(roomId => {
             // get clients of this room
             const clients = Array.from(
@@ -131,10 +169,10 @@ io.on("connection", (socket)=>{
                     userId: socketUserMapping[socket.id]?.id
                 })
 
-                socket.emit('REMOVE_PEER', {
-                    peerId: clientId, // remove others from my side as well.
-                    userId: socketUserMapping[clientId]?.id
-                })
+                // socket.emit('REMOVE_PEER', {
+                //     peerId: clientId, // remove others from my side as well.
+                //     userId: socketUserMapping[clientId]?.id
+                // })
             })
 
             socket.leave(roomId)
