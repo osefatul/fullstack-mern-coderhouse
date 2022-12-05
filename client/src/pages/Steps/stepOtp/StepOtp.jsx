@@ -23,6 +23,7 @@ const StepOtp = () => {
             if (!otp || !phone || !hash) return;
 
             const { data } = await verifyOtp({ otp, phone, hash });
+            console.log(data)
             dispatch(setAuth(data));
             if(data){
                 navigate("/activate")

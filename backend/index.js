@@ -14,14 +14,30 @@ const server = require("http").createServer(app);
 const io = require('socket.io')(server, {
     cors: {
         origin: "http://localhost:3000",
-        methods: ["GET0", "POST"]
-    }
-})
+        methods: ["GET","POST"]
+}});
+
+
+
+
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+    next();
+});
+
+
 app.use(cookieParser());
+
 const corsOption = {
     credentials: true,
     origin: ['http://localhost:3000'],
 };
+
+
 app.use(cors(corsOption));
 app.use('/storage', express.static('storage'));
 
@@ -43,18 +59,21 @@ const socketUserMapping = {};
 io.on("connection", (socket)=>{
     console.log("Socket connected => ", socket.id) //my socket.id
 
-    //Whenever someone joins socket for the first time...
+
+
+    //WHENEVER SOMEONE JOINS FOR THE 1ST TIME.
     socket.on("JOIN", ({roomId, user})=>{
         socketUserMapping[socket.id] = user;
 
-         //JOIN THE ROOM
+         //JOIN THE socket with roomId
         socket.join(roomId);
 
-        //Get me roomId from all the rooms inside the io server or there is no room created yet then give me an empty array.
+        //Get me socketId of all the users joined this specific room (roomId) from all the rooms inside the io server or if there is no client inside the room created yet then give me an empty array of clients.
         const clients = Array.from (io.sockets.adapter.rooms.get(roomId) || []);
         console.log("clients: ", clients)
 
         // If there are clients inside the room, the one we just got.
+        //clientId = socket.id inside the room
         clients.forEach(clientId => {
 
             //SEND EMIT TO PEERS FOR CONNECTION, and tell them don't worry about offer, we will create them.
@@ -66,15 +85,67 @@ io.on("connection", (socket)=>{
 
             //ADDING MYSELF AS WELL INTO THE CONNECTION OR ROOM
             socket.emit("ADD_PEER", {
-                peerId: clientId, //SEND ME CLIENT ID
-                createOffer: true, //I AM CREATING OFFER 
-                user:socketUserMapping[clientId]
+                peerId: clientId, //SEND ME EACH CLIENT socket.ID
+                createOffer: true, //I AM CREATING OFFER FOR EACH CLIENT
+                user: socketUserMapping[clientId]
             })
         })
 
     });
 
-})
 
+    //HANDLE RELAY ICE
+    socket.on('RELAY_ICE', ({peerId, icecandidate}) => {
+        //Send this below info to the peerId
+        io.to(peerId).emit('ICE_CANDIDATE', {
+            peerId:socket.id,
+            icecandidate
+        })
+    })
+
+
+    //HANDLE RELAY SESSION_DESCRIPTION
+    socket.on("RELAY_SDP", ({peerId, sessionDescription})=>{
+        io.to(peerId).emit("SESSION_DESCRIPTION", {
+            peerId:socket.id,
+            sessionDescription
+        })
+    })
+
+
+    //LEAVE ROOM
+    const leaveRoom = ({roomId}) => {
+
+        const {rooms} = socket; //get all rooms from socket.
+
+        Array.from(rooms).forEach(roomId => {
+            // get clients of this room
+            const clients = Array.from(
+                io.sockets.adapter.rooms.get(roomId) || []
+            )
+
+            //clientId = socket.id of other clients
+            clients.forEach(clientId =>{
+                io.to(clientId).emit("REMOVE_PEER", {
+                    peerId: socket.id, //send my socket.id to other clients
+                    userId: socketUserMapping[socket.id]?.id
+                })
+
+                socket.emit('REMOVE_PEER', {
+                    peerId: clientId, // remove others from my side as well.
+                    userId: socketUserMapping[clientId]?.id
+                })
+            })
+
+            socket.leave(roomId)
+        })
+
+        delete socketUserMapping[socket.id]
+    }
+    socket.on("LEAVE", leaveRoom)
+
+    socket.on('disconnecting', leaveRoom);
+
+})
 
 server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
