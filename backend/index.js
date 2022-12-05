@@ -41,26 +41,37 @@ app.get('/', (req, res) => {
 const socketUserMapping = {};
 
 io.on("connection", (socket)=>{
-    console.log("new connection", socket.id)
+    console.log("Socket connected => ", socket.id) //my socket.id
 
+    //Whenever someone joins socket for the first time...
     socket.on("JOIN", ({roomId, user})=>{
         socketUserMapping[socket.id] = user;
 
-        //this Map object so we need to wrap it around array.
-        const clients = Array.from (io.sockets.adapter.rooms.get(roomId) || []);
+         //JOIN THE ROOM
+        socket.join(roomId);
 
-        // ClientId is nothing but a socket.id
+        //Get me roomId from all the rooms inside the io server or there is no room created yet then give me an empty array.
+        const clients = Array.from (io.sockets.adapter.rooms.get(roomId) || []);
+        console.log("clients: ", clients)
+
+        // If there are clients inside the room, the one we just got.
         clients.forEach(clientId => {
 
-            //SEND EMIT TO PEERS FOR CONNECTION
-            io.to(clientId).emit("ADD_PEER", {});
+            //SEND EMIT TO PEERS FOR CONNECTION, and tell them don't worry about offer, we will create them.
+            io.to(clientId).emit("ADD_PEER", {
+                peerId: socket.id, //send to other clients my socket.id
+                createOffer:false,
+                user
+            });
 
-            //WANT TO ADD MYSELF AS WELL INTO THE CONNECTION
-            socket.emit("ADD_PEER", {})
-
-            //join room
-            socket.join(roomId);
+            //ADDING MYSELF AS WELL INTO THE CONNECTION OR ROOM
+            socket.emit("ADD_PEER", {
+                peerId: clientId, //SEND ME CLIENT ID
+                createOffer: true, //I AM CREATING OFFER 
+                user:socketUserMapping[clientId]
+            })
         })
+
     });
 
 })
