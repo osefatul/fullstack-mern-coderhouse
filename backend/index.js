@@ -25,16 +25,12 @@ app.use(function (req, res, next) {
 
 
 app.use(cookieParser());
-
 const corsOption = {
     credentials: true,
     origin: ['http://localhost:3000'],
 };
 
-
 app.use(cors(corsOption));
-
-
 app.use('/storage', express.static('storage'));
 
 const PORT = process.env.PORT || 5500;
@@ -48,13 +44,11 @@ app.get('/', (req, res) => {
 
 
 
-
 //SOCKETS FUNCTIONALITIES
 const socketUserMapping = {};
 
 io.on("connection", (socket)=>{
     console.log("Socket connected => ", socket.id) //my socket.id
-
 
 
     //WHENEVER SOMEONE JOINS FOR THE 1ST TIME.
@@ -92,7 +86,7 @@ io.on("connection", (socket)=>{
 
     //HANDLE RELAY ICE
     socket.on('RELAY_ICE', ({peerId, icecandidate}) => {
-        //Send this below info to the peerId
+        //WE now send icecandidate to peerId this below info to the peerId
         io.to(peerId).emit('ICE_CANDIDATE', {
             peerId:socket.id,
             icecandidate
