@@ -4,7 +4,7 @@ import { logout } from '../../../http';
 import styles from './navigation.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAuth } from '../../../features/authSlice';
-
+import { RiLogoutCircleRLine } from 'react-icons/ri';
 
 
 
@@ -12,6 +12,7 @@ const Navigation = () => {
 
     const dispatch = useDispatch();
     const { isAuth, user } = useSelector((state) => state.auth);
+
     async function logoutUser() {
         try {
             const { data } = await logout();
@@ -29,12 +30,12 @@ const Navigation = () => {
                 <img 
                     className={styles.logoAvatar} 
                     src="https://cdn-icons-png.flaticon.com/512/2408/2408462.png" alt="logo" />
-                <span className={styles.logoText}>Codershouse</span>
+                <span className={styles.logoText}>CodersHouse</span>
             </Link>
 
             {isAuth && (
                 <div className={styles.navRight}>
-                    <h3>{user?.name}</h3>
+                    {/* <h3>{user?.name}</h3> */}
                     <Link to="/">
                         <img
                             className={styles.avatar}
@@ -51,7 +52,7 @@ const Navigation = () => {
                         className={styles.logoutButton}
                         onClick={logoutUser}
                     >
-                        <img src="/images/logout.png" alt="logout" />
+                        <RiLogoutCircleRLine />
                     </button>
                 </div>
             )}

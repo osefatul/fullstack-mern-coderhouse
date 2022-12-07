@@ -3,6 +3,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    border-bottom: 1px solid #05a305;
+    border-radius: 5px;
 }
 
 .brandStyle{
@@ -11,35 +13,72 @@
     font-weight: bold;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
 }
 
 .logoText {
 font-size: 20px;
 }
 
+
 .logoAvatar{
     width: 35px;
     height: 40px;
     background: gray;
+    border-radius: 2px;
 }
 
 
 .logoutButton {
+    color: #fff;
     background: none;
     cursor: pointer;
+    border: none;
+    font-size: 22px;
 }
 
 .navRight {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 5px;
 }
 
 .avatar {
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid #0077ff;
-    height: 45px;
-    width: 45px;
+    height: 40px;
+    width: 40px;
+}
+
+.avatar:hover{
+    border: 2px solid #217c06;
+}
+
+
+
+
+
+
+@media screen and (max-width: 500px) {
+    .logoText {
+        font-size: 15px;
+    }
+
+    .avatar {
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #0077ff;
+        height: 30px;
+        width: 30px;
+    }
+}
+
+
+
+
+@media screen and (max-width: 350px) {
+    .logoText {
+        display: none;
+    }
 }
