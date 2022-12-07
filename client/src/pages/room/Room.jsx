@@ -8,11 +8,12 @@ import styles from './room.module.css';
 
 function Room() {
     const user = useSelector((state) => state.auth.user);
-    const [isMuted, setMuted] = useState(true);
-    const navigate = useNavigate();
 
-    const { id: roomId } = useParams();
+    const [isMuted, setMuted] = useState(true);
     const [room, setRoom] = useState(null);
+    
+    const navigate = useNavigate();
+    const { id: roomId } = useParams();
 
     const { clients, provideRef, handleMute } = useWebRTC(roomId, user);
 
@@ -48,6 +49,7 @@ function Room() {
 
     return (
         <div>
+
         <div className="container">
             <button 
             onClick={handManualLeave} 
@@ -56,6 +58,7 @@ function Room() {
                 <span>All voice rooms</span>
             </button>
         </div>
+
         <div className={styles.clientsWrap}>
             <div className={styles.header}>
                 {room && <h2 className={styles.topic}>{room.topic}</h2>}
@@ -72,6 +75,7 @@ function Room() {
                     </button>
                 </div>
             </div>
+
             <div className={styles.clientsList}>
                 {clients.map((client) => {
                     return (
@@ -112,6 +116,7 @@ function Room() {
                     );
                 })}
             </div>
+            
         </div>
     </div>
     );

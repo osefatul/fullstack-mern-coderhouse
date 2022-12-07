@@ -9,18 +9,7 @@ import { setAuth } from '../../../features/authSlice';
 
 
 const Navigation = () => {
-    const brandStyle = {
-        color: '#fff',
-        textDecoration: 'none',
-        fontWeight: 'bold',
-        fontSize: '22px',
-        display: 'flex',
-        alignItems: 'center',
-    };
 
-    const logoText = {
-        marginLeft: '10px',
-    };
     const dispatch = useDispatch();
     const { isAuth, user } = useSelector((state) => state.auth);
     async function logoutUser() {
@@ -36,9 +25,11 @@ const Navigation = () => {
     return (
         <nav className={`${styles.navbar} container`}>
             
-            <Link style={brandStyle} to="/">
-                <img src="/images/logo.png" alt="logo" />
-                <span style={logoText}>Codershouse</span>
+            <Link className={styles.brandStyle} to="/">
+                <img 
+                    className={styles.logoAvatar} 
+                    src="https://cdn-icons-png.flaticon.com/512/2408/2408462.png" alt="logo" />
+                <span className={styles.logoText}>Codershouse</span>
             </Link>
 
             {isAuth && (

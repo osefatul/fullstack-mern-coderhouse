@@ -322,11 +322,10 @@ import freeice from "freeice"
 
 
 
-
-
-
 export const useWebRTC = (roomId, user) => {
+
     const [clients, setClients] = useStateWithCallback([]);
+
     const audioElements = useRef({});
     const connections = useRef({});
     const socket = useRef(null);
@@ -337,10 +336,12 @@ export const useWebRTC = (roomId, user) => {
 
     const addNewClient = useCallback(
         (newClient, cb) => {
+            // console.log("this is a new client", newClient);
             const lookingFor = clients.find(
                 (client) => client.id === newClient.id
             );
-
+            
+            // if client is no there then add.
             if (lookingFor === undefined) {
                 setClients(
                     (existingClients) => [...existingClients, newClient],
@@ -351,9 +352,11 @@ export const useWebRTC = (roomId, user) => {
         [clients, setClients]
     );
 
+
     useEffect(() => {
         clientsRef.current = clients;
     }, [clients]);
+
 
 
     useEffect(() => {
@@ -570,9 +573,14 @@ export const useWebRTC = (roomId, user) => {
         };
     }, []);
 
+
     const provideRef = (instance, userId) => {
         audioElements.current[userId] = instance;
+
+        // console.log("What is instance", instance)
+        // console.log(audioElements.current)
     };
+
 
     const handleMute = (isMute, userId) => {
         let settled = false;
