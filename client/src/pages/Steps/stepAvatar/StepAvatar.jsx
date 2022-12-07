@@ -68,6 +68,11 @@ const StepAvatar = ({ onNext }) => {
     }, []);
 
     if (loading) return <Loader message="Activation in progress..." />;
+
+
+
+
+
     return (
         <>
             <Card title={`Okay, ${name}`} icon="monkey-emoji">

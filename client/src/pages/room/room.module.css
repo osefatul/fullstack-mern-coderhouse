@@ -1,26 +1,54 @@
 .topRoom{
     position: relative;
     width: 14%;
+    transition: width 0.5s ease-in-out;
 }
+
+.burger{
+    position: absolute;
+    top: -50px;
+    left: 30px;
+    font-size: 20px;
+    display: flex;
+    justify-content: flex-end;
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+
+}
+
+.close{
+display: none;
+justify-content: flex-end;
+font-weight:800;
+font-size: 20px;
+border-radius: 50%;
+transition: all 0.5s ease-in-out;
+cursor: pointer;
+padding-top: 10px;
+padding-right: 25px;
+color: red;
+}
+
 .room{
     position: absolute;
-    top: -70px;
+    top: -82px;
     background: #1d1d1d;
     width: 100%;
     height: 100vh;
+    /* padding-top: 20px; */
 }
 
 
 .goBack {
     width: 100%;
-    padding:  1rem;
+    /* padding:  1rem; */
     padding-top: 1.5rem;
-
+    padding-bottom: 2rem;
 
     display: flex;
     align-items: center;
-    justify-content: space-between;
-
+    justify-content: flex-start;
+    gap: 10px;
     background: none;
     outline: none;
     border: none;
@@ -35,7 +63,17 @@
     position: relative;
 }
 
-.goBack span::after {
+
+
+.header{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.header span::after {
     content: '';
     position: absolute;
     bottom: -10px;
@@ -46,15 +84,6 @@
     border-radius: 10px;
 }
 
-
-.header{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    
-}
-
 .actionBtn {
     background: #262626;
 
@@ -63,7 +92,7 @@
     border: none;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: start;
 
     padding: 0.7rem 0.5rem;
     border-radius: 5px;
@@ -94,18 +123,31 @@
 }
 
 .topic {
+    width: 100%;
+    margin-left: 8px;
     font-size: 18px;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: darkgrey;
 }
+
+.online{
+    width: 100%;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    margin-left: 10px;
+    margin-top: 2rem;
+    }
 
 .clientsList {
     width: 95%;
-    margin-top: 3rem;
-
+    margin-top: 1rem;
     display: flex;
     align-items: center;
     justify-content: start;
-
     flex-wrap: wrap;
     gap: 10px;
 }
@@ -121,7 +163,7 @@
     width: 45px;
     height: 45px;
     border-radius: 50%;
-    border: 3px solid #5453e0;
+    border: 3px solid #056e17;
     position: relative;
 }
 
@@ -153,5 +195,50 @@
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+
+
 .micImg {
 }
+
+
+
+@media screen and (max-width: 1100px) {
+    .close{
+        display: flex;
+        justify-content: flex-end;
+        padding-top: 10px;
+        padding-right: 25px;
+        font-weight: bold;
+        font-size: 20px;
+        border-radius: 50%;
+        transition: all 0.5s ease-in-out;
+        cursor: pointer;
+        color: red;
+    }
+
+    .topRoom{
+        position: relative;
+        width: 200px;
+        transition: all 0.5s ease-in-out;
+    }
+    
+}
+
+
+@media screen and (max-width: 450px) {
+    .burger{
+        position: absolute;
+        top: -50px;
+        left: 10px;
+        font-size: 20px;
+        display: flex;
+        justify-content: flex-end;
+        transition: all 0.5s ease-in-out;
+        cursor: pointer;
+    }
+
+    
+}
+
+
+

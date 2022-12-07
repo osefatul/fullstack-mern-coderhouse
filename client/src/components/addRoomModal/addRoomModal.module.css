@@ -43,7 +43,7 @@
 
 .closeButton {
     position: absolute;
-    left: -25px;
+    right: -25px;
     top: -20px;
     background: #b32209;;
     border: 1px solid #b32209;
@@ -230,7 +230,7 @@
 
     .closeButton {
         position: absolute;
-        left: -25px;
+        right: -25px;
         top: -20px;
         background: #b32209;;
         border: 1px solid #b32209;

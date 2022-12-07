@@ -27,11 +27,12 @@ const Navigation = () => {
         <nav className={`${styles.navbar} container`}>
             
             <Link className={styles.brandStyle} to="/">
-                <img 
+                <img
+                    loading='lazy'
                     className={styles.logoAvatar} 
-                    src="images/logoAvatar2.png"
+                    src="/images/logoAvatar2.png"
                     alt="logo" />
-                <span className={styles.logoText}>CodersHouse</span>
+                <span className={styles.logoText}>Coding House</span>
             </Link>
 
             {isAuth && (

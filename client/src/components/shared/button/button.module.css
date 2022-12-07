@@ -9,7 +9,7 @@
     color: #fff;
     font-size: 18px;
     font-weight: bold;
-    border-radius: 50px;
+    border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 }
@@ -18,4 +18,28 @@
 }
 .arrow {
     margin-left: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .button {
+        background: #0077ff;
+        padding: 8px 12px;
+        border: none;
+        outline: none;
+        display: flex;
+        align-items: center;
+        margin: 0 auto;
+        color: #fff;
+        font-size: 15px;
+        font-weight: bold;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+    }
+    .button:hover {
+        background: #014a9c;
+    }
+    .arrow {
+        margin-left: 5px;
+    }
 }

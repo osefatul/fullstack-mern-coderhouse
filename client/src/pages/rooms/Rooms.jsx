@@ -80,22 +80,47 @@ const dummyRooms = [
 const Rooms = () => {
 
     const [showModal, setShowModal] = useState(false);
+    const [data, setData] = useState([]);
     const [rooms, setRooms] = useState([]);
 
     useEffect(() => {
         const fetchRooms = async () => {
             const { data } = await getAllRooms();
             setRooms(data);
+            setData(data)
+            console.log(rooms)
         };
         fetchRooms();
-        // setRooms(dummyRooms);
     }, []);
-
 
 
     function openModal() {
         setShowModal(true);
     }
+    
+// Filter
+    const searchRoom = (e)=>{
+        e.preventDefault();
+        
+        setData(data.filter( r => {
+            if(!e.target.value){
+                const fetchRooms = async () => {
+                    const { data } = await getAllRooms();
+                    setRooms(data);
+                    setData(data)
+                    console.log(rooms)
+                };
+                fetchRooms();
+            }
+            else{
+                return r.topic.toLowerCase().includes(e.target.value.toLowerCase())
+            }
+        }))
+    }
+
+    useEffect(()=>{
+        setRooms(data)
+    },[data])
     
     
     return (
@@ -107,7 +132,7 @@ const Rooms = () => {
                         <span className={styles.heading}>All rooms</span>
                         <div className={styles.searchBox}>
                             <img src="/images/search-icon.png" alt="search" />
-                            <input type="text" className={styles.searchInput} />
+                            <input type="text" className={styles.searchInput} onChange={searchRoom}/>
                         </div>
                     </div>
 
