@@ -8,15 +8,48 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
 }
 
 .modalBody {
-    width: 50%;
-    max-width: 500px;
+    width: 100%;
+    max-width: 800px;
     background: #1d1d1d;
-    border-radius: 20px;
+    border-radius: 5px;
     position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
+
+.topic{
+    width: 100%;
+    padding-top: 10px;
+    display: flex;
+    /* flex-direction: column; */
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.heading {
+    margin-bottom: 5px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+.closeButton {
+    position: absolute;
+    left: -25px;
+    top: -20px;
+    background: #b32209;;
+    border: 1px solid #b32209;
+    cursor: pointer;
+}
+
 
 .modalHeader {
     padding: 30px;
@@ -42,9 +75,6 @@
     background: #262626;
 }
 
-.heading {
-    margin-bottom: 5px;
-}
 
 .subHeading {
     font-size: 18px;
@@ -70,7 +100,8 @@
     width: 200px;
     justify-content: center;
     padding: 7px 10px;
-    border-radius: 20px;
+    border-radius: 5px;
+    border: none;
     margin: 0 auto;
     transition: all 0.3s ease-in-out;
 }
@@ -84,9 +115,131 @@
     font-weight: bold;
 }
 
-.closeButton {
-    position: absolute;
-    right: 3px;
-    top: 8px;
-    background: none;
+
+
+@media screen and (max-width: 700px) {
+    .modalBody {
+        width: 100%;
+        max-width: 470px;
+        background: #1d1d1d;
+        border-radius: 5px;
+        position: relative;
+        padding-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    
+    }
+    
+
+    .topic{
+        width: 80%;
+        padding-top: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .heading {
+        margin-bottom: 5px;
+        font-size: 15px;
+        font-weight: bold;
+        margin-left: -22px;
+    }
+    
+}
+
+
+
+
+@media screen and (max-width: 500px) {
+    .modalBody {
+        width: 100%;
+        max-width: 370px;
+        background: #1d1d1d;
+        border-radius: 5px;
+        position: relative;
+        padding-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    
+    }
+    
+
+    .topic{
+        width: 80%;
+        padding-top: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .heading {
+        margin-bottom: 5px;
+        font-size: 15px;
+        font-weight: bold;
+        margin-left: -22px;
+    }
+    
+}
+
+
+
+
+@media screen and (max-width: 450px) {
+    .modalBody {
+        width: 100%;
+        max-width: 270px;
+        background: #1d1d1d;
+        border-radius: 5px;
+        position: relative;
+        padding-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    
+    }
+    
+
+    .topic{
+        width: 60%;
+        padding-top: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+        margin-right: 20px;
+    }
+    
+    .heading {
+        width: 100%;
+        margin-bottom: 5px;
+        font-size: 15px;
+        font-weight: bold;
+        margin-left: 8px;
+    }
+
+    .closeButton {
+        position: absolute;
+        left: -25px;
+        top: -20px;
+        background: #b32209;;
+        border: 1px solid #b32209;
+        cursor: pointer;
+        width: 35px;
+    }
+
+    .roomTypes{
+        gap: 10px;
+    }
+    
 }

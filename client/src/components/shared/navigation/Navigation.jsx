@@ -29,7 +29,8 @@ const Navigation = () => {
             <Link className={styles.brandStyle} to="/">
                 <img 
                     className={styles.logoAvatar} 
-                    src="https://cdn-icons-png.flaticon.com/512/2408/2408462.png" alt="logo" />
+                    src="images/logoAvatar2.png"
+                    alt="logo" />
                 <span className={styles.logoText}>CodersHouse</span>
             </Link>
 

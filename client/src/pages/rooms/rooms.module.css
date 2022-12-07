@@ -43,9 +43,9 @@
     position: absolute;
     bottom: -10px;
     left: 0;
-    width: 60%;
-    height: 4px;
-    background: #0077ff;
+    width: 100%;
+    height: 2px;
+    background: #d8ce40;
 }
 
 .startRoomButton {
@@ -53,7 +53,8 @@
     align-items: center;
     background: #20bd5f;
     padding: 5px 20px;
-    border-radius: 20px;
+    border-radius: 5px;
+    border: none;
     color: #fff;
     transition: all 0.3s ease-in-out;
 }
@@ -73,10 +74,72 @@
     width: 100%;
     align-items: center;
     justify-content: flex-start;
-    
     flex-wrap: wrap;
     gap: 20px;
     margin-top: 60px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.roomCard{
+}
+
+
+
+@media screen and (max-width: 940px){
+
+    
+    .roomsHeader {
+        display: flex;
+        flex-direction:column-reverse;
+        gap: 15px;
+        align-items: center;
+        margin: 25px 0;
+        width: 100%;
+    }
+    
+    .left {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: start;
+        gap: 25px;
+    }
+    
+    .heading {
+        font-size: 20px;
+        font-weight: bold;
+    }
+    
+    .searchBox {
+        background: #262626;
+        margin-left: 20px;
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+        min-width: 150px;
+        border-radius: 20px;
+    }
+
+
+    .searchInput {
+        background: transparent;
+        border: none;
+        outline: none;
+        padding: 10px;
+        color: #fff;
+        width: 100%;
+    }
+
+
+
+    .roomList {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin: 60px auto;
+    }
 }

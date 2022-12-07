@@ -27,19 +27,27 @@ function AddRoomModal({ onClose }) {
 
     return (
         <div className={styles.modalMask}>
+
             <div className={styles.modalBody}>
                 <button onClick={onClose} className={styles.closeButton}>
                     <img src="/images/close.png" alt="close" />
                 </button>
-                <div className={styles.modalHeader}>
+
+                <div className={styles.topic}>
                     <h3 className={styles.heading}>
-                        Enter the topic to be disscussed
+                            Enter the topic to be discussed:
                     </h3>
+                    
                     <TextInput
+                        // className={styles.textInput}
                         fullwidth="true"
                         value={topic}
                         onChange={(e) => setTopic(e.target.value)}
                     />
+                </div>
+
+                <div className={styles.modalHeader}>
+                    
                     <h2 className={styles.subHeading}>Room types</h2>
                     <div className={styles.roomTypes}>
                         <div
@@ -71,8 +79,9 @@ function AddRoomModal({ onClose }) {
                         </div>
                     </div>
                 </div>
+
                 <div className={styles.modalFooter}>
-                    <h2>Start a room, open to everyone</h2>
+
                     <button
                         onClick={createRoom}
                         className={styles.footerButton}

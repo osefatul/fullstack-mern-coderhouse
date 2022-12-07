@@ -15,6 +15,7 @@ const RoomCard = ({ room }) => {
             className={styles.card}
         >
             <h3 className={styles.topic}>{room.topic}</h3>
+
             <div
                 className={`${styles.speakers} ${
                     room.speakers.length === 1 ? styles.singleSpeaker : ''
@@ -42,6 +43,7 @@ const RoomCard = ({ room }) => {
                     ))}
                 </div>
             </div>
+            
             <div className={styles.peopleCount}>
                 <span>{room.totalPeople}</span>
                 <img src="/images/user-icon.png" alt="user-icon" />

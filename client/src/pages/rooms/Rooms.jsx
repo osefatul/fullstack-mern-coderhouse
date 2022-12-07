@@ -104,7 +104,7 @@ const Rooms = () => {
                 <div className={styles.roomsHeader}>
 
                     <div className={styles.left}>
-                        <span className={styles.heading}>All voice rooms</span>
+                        <span className={styles.heading}>All rooms</span>
                         <div className={styles.searchBox}>
                             <img src="/images/search-icon.png" alt="search" />
                             <input type="text" className={styles.searchInput} />
@@ -127,7 +127,7 @@ const Rooms = () => {
 
                 <div className={styles.roomList}>
                     {rooms.map((room) => (
-                        <RoomCard key={room.id} room={room} />
+                        <RoomCard className={styles.roomCard} key={room.id} room={room} />
                     ))}
                 </div>
             </div>

@@ -23,7 +23,7 @@ export const useStateWithCallback = (initialState) => {
         // cb.current is `null` on initial render, 
         // so we only invoke callback on state *updates*
         if (cbRef.current) {
-            cbRef.current(state);
+            cbRef.current(state);// this will execute the callback
             cbRef.current = null; // reset callback after execution
         }
         
