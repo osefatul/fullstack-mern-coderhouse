@@ -126,6 +126,7 @@ const Rooms = () => {
     return (
         <>
             <div className="container">
+                
                 <div className={styles.roomsHeader}>
 
                     <div className={styles.left}>

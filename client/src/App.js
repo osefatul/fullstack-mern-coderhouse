@@ -14,6 +14,7 @@ import SemiProtectRoutes from './ProtectedRoutes/SemiProtectRoutes';
 import { useLoadingWithRefresh } from './hooks/useLoadingWithRefresh';
 import Loader from './components/shared/loader/Loader';
 import Room from './pages/room/Room';
+import React from 'react';
 
 
 
@@ -57,10 +58,10 @@ function App() {
 
       <Route path='/' element={<ProtectedRoutes/>}>
         <Route path="/rooms" element={
-          <>
+          <React.Fragment>
             <Navigation />
             <Rooms />
-          </>
+          </React.Fragment>
         }/>
 
 
